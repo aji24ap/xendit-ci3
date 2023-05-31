@@ -4,6 +4,7 @@ Xendit dengan Codeigniter 3
 
 Install [composer](https://getcomposer.org/) ke perangkat kamu.
 
+setelah itu jalakan perintah ini diterminal kamu.
 ```bash
-composer require
+composer install
 ```
