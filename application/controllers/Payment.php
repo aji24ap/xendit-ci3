@@ -19,6 +19,10 @@ class Payment extends CI_Controller {
         $amount = $this->input->post('amount');
         $payer_email = $this->input->post('payer_email');
 
+        //  Membuat Biaya Transaksi
+        $fee = 5000;
+        $harga = $amount + $fee;
+
         // Mengatur API Key Xendit (ganti XENDIT_API_KEY dengan API Key kamu)
         Xendit::setApiKey('XENDIT_API_KEY');
 
@@ -27,18 +31,28 @@ class Payment extends CI_Controller {
             $payment = \Xendit\Invoice::create([
                 'external_id' => $external_id,
                 'payer_email' => $payer_email,
-                'amount' => $amount,
+                'amount' => $harga,
+                'description' => "Invoice Pembayaran $external_id",
+                'invoice_duration' => 86400, // 1 hari
                 'success_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
                 'failure_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
                 'currency' => 'IDR',
                 'locale' => 'id',
+                'items' => [
+                    [
+                        'quantity' => 1,
+                        'price' => $harga,
+                        'name' => 'Test Payment',
+                        'category' => 'Electronic'
+                    ]
+                ],
                 'fees' => [
                     [
                         'type' => 'Biaya Transaksi',
-                        'value' => 2500
+                        'value' => $fee
                     ]
                 ]
-            ]);
+            ]);    
 
             // Simpan data pembayaran ke dalam database
             $data = [
