@@ -31,14 +31,6 @@ class Payment extends CI_Controller {
                 'success_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
                 'failure_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
                 'currency' => 'IDR',
-            ]);
-
-            // Simpan data pembayaran ke dalam database
-            $data = [
-                'external_id' => $external_id,
-                'amount' => $amount,
-                'payer_email' => $payer_email,
-                'status' => 'pending', // Status pembayaran awal
                 'locale' => 'id',
                 'fees' => [
                     [
@@ -46,6 +38,14 @@ class Payment extends CI_Controller {
                         'value' => 2500
                     ]
                 ]
+            ]);
+
+            // Simpan data pembayaran ke dalam database
+            $data = [
+                'external_id' => $external_id,
+                'amount' => $amount,
+                'payer_email' => $payer_email,
+                'status' => 'pending' // Status pembayaran awal
             ];
             $this->db->insert('payments', $data);
 
