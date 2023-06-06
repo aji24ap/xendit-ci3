@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <style>
-        body {
+         body {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -23,7 +23,7 @@
             background-color: #f8f9fa;
             padding: 20px 0;
         }
-    </style>
+      </style>
    </head>
    <body>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

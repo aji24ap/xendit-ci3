@@ -38,7 +38,14 @@ class Payment extends CI_Controller {
                 'external_id' => $external_id,
                 'amount' => $amount,
                 'payer_email' => $payer_email,
-                'status' => 'pending' // Status pembayaran awal
+                'status' => 'pending', // Status pembayaran awal
+                'locale' => 'id',
+                'fees' => [
+                    [
+                        'type' => 'Biaya Transaksi',
+                        'value' => 2500
+                    ]
+                ]
             ];
             $this->db->insert('payments', $data);
 
