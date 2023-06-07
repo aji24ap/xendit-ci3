@@ -110,4 +110,60 @@ class Payment extends CI_Controller {
         $data['payments'] = $this->M_Xendit->get_data('payments')->result();
         $this->load->view('data_transaksi', $data);
     }
+
+    public function bayar($external_id) {
+        $data['payments'] = $this->M_Xendit->get_data('payments')->result();
+        $data['payments'] = $this->db->query("SELECT * FROM payments WHERE external_id='$external_id'")->result();
+        $this->load->view('bayar', $data);
+    }
+
+    public function bayar_ulang() {
+        $external_id = $this->input->post('external_id');
+        $amount = $this->input->post('amount');
+        $payer_email = $this->input->post('payer_email');
+
+        //  Membuat Biaya Transaksi
+        $fee = 5000;
+        $harga = $amount + $fee;
+
+        // Mengatur API Key Xendit (ganti XENDIT_API_KEY dengan API Key kamu)
+        Xendit::setApiKey('XENDIT_API_KEY');
+
+        try {
+            // Membuat pembayaran menggunakan Xendit
+            $payment = \Xendit\Invoice::create([
+                'external_id' => $external_id,
+                'payer_email' => $payer_email,
+                'amount' => $harga,
+                'description' => "Invoice Pembayaran $external_id",
+                'invoice_duration' => 86400, // 1 hari
+                'success_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
+                'failure_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
+                'currency' => 'IDR',
+                'locale' => 'id',
+                'items' => [
+                    [
+                        'quantity' => 1,
+                        'price' => $harga,
+                        'name' => 'Test Payment',
+                        'category' => 'Electronic'
+                    ]
+                ],
+                'fees' => [
+                    [
+                        'type' => 'Biaya Transaksi',
+                        'value' => $fee
+                    ]
+                ]
+            ]);    
+
+            // Redirect ke halaman pembayaran Xendit
+            redirect($payment['invoice_url']);
+        } catch (ApiException $e) {
+            // Handle error pembayaran
+            $error_message = $e->getMessage();
+            $this->session->set_flashdata('error', $error_message);
+            redirect('payment');
+        }
+    }
 }    

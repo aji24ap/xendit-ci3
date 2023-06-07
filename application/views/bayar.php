@@ -1,11 +1,7 @@
-<?php
-   $random_string = random_string('alnum', 8);
-   $nomor_invoice = strtoupper('JI'.$random_string);
-   ?>
 <!DOCTYPE html>
 <html>
    <head>
-      <title id="info-my"><?php echo $title; ?></title>
+      <title id="info-my">Pembayaran System</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <style>
@@ -44,20 +40,22 @@
       <?php endif; ?>
       <div class="container">
          <h1 class="mt-5">Xendit Test Pembayaran</h1>
-         <form method="post" action="<?php echo site_url('payment/process_payment'); ?>" class="mt-4">
+         <?php foreach($payments as $t){ ?>
+         <form method="post" action="<?php echo site_url('payment/bayar_ulang'); ?>" class="mt-4">
             <div class="mb-3">
                <label for="external_id" class="form-label">External ID:</label>
-               <input type="text" name="external_id" class="form-control" value="<?= $nomor_invoice ?>" readonly>
+               <input type="text" name="external_id" class="form-control" value="<?php echo $t->external_id ?>" readonly>
             </div>
             <div class="mb-3">
                <label for="amount" class="form-label">Harga:</label>
-               <input type="number" name="amount" class="form-control" required>
+               <input type="number" name="amount" class="form-control" value="<?php echo $t->amount ?>" readonly>
             </div>
             <div class="mb-3">
                <label for="payer_email" class="form-label">Email:</label>
-               <input type="email" name="payer_email" class="form-control" required>
+               <input type="email" name="payer_email" class="form-control" value="<?php echo $t->payer_email ?>" readonly>
             </div>
             <button type="submit" class="btn btn-primary">Test Bayar</button>
+            <?php } ?>
          </form>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

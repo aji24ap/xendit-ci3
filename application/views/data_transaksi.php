@@ -14,11 +14,6 @@
         .content {
             flex-grow: 1;
         }
-
-        .footer {
-            background-color: #f8f9fa;
-            padding: 20px 0;
-        }
       </style>
    </head>
    <body>
@@ -49,6 +44,7 @@
                   <th>External ID</th>
                   <th>Status</th>
                   <th>Pembayaran</th>
+                  <th>Aksi</th>
                </tr>
             </thead>
             <tbody>
@@ -65,7 +61,7 @@
                            case 'pending':
                               $badgeClass = 'badge bg-danger';
                               break;
-                           case 'PAID':
+                           case 'Sudah Dibayar':
                               $badgeClass = 'badge bg-success';
                               break;
                            case 'expired':
@@ -81,6 +77,15 @@
                      </span>
                   </td>
                   <td><?php echo $data->amount; ?></td>
+                  <td><?php
+                     if($data->status == 'Sudah Dibayar'){
+                         echo '<span class="badge text-bg-success">Transaksi Selesai</span>';
+                     } else {
+                     ?>
+                     <a class="btn btn-warning btn-sm btn-block" href="<?php echo base_url().'payment/bayar/'.$data->external_id; ?>">
+                     Bayar Transaksi</a><?php } ?>
+                  </td>
+                  </td>
                </tr>
                <?php endforeach; ?>
             </tbody>
