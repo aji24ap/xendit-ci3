@@ -123,7 +123,7 @@ class Payment extends CI_Controller {
         $payer_email = $this->input->post('payer_email');
 
         // Mendapatkan status transaksi dari model atau sumber data lainnya
-        $status = $this->M_Xendit->ambil_status($external_id); // Ganti dengan pemanggilan model yang sesuai
+        $status = $this->M_Xendit->ambil_status($external_id);
 
         // Cek status transaksi
         if ($status === "Expired") {
