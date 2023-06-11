@@ -122,6 +122,18 @@ class Payment extends CI_Controller {
         $amount = $this->input->post('amount');
         $payer_email = $this->input->post('payer_email');
 
+        // Mendapatkan status transaksi dari model atau sumber data lainnya
+        $status = $this->M_Xendit->ambil_status($external_id); // Ganti dengan pemanggilan model yang sesuai
+
+        // Cek status transaksi
+        if ($status === "Expired") {
+            $this->session->set_flashdata('error', 'Transaksi ini sudah expired.');
+            redirect('payment');
+        } elseif ($status === "Sudah Dibayar") {
+            $this->session->set_flashdata('error', 'Transaksi ini sudah selesai.');
+            redirect('payment');
+        }
+
         //  Membuat Biaya Transaksi
         $fee = 5000;
         $harga = $amount + $fee;

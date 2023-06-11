@@ -40,7 +40,8 @@
       <?php endif; ?>
       <div class="container">
          <h1 class="mt-5">Xendit Test Pembayaran</h1>
-         <?php foreach($payments as $t){ ?>
+         <?php foreach($payments as $t){ 
+         if ($t->status !== "Expired" && $t->status !== "Sudah Dibayar") { ?>
          <form method="post" action="<?php echo site_url('payment/bayar_ulang'); ?>" class="mt-4">
             <div class="mb-3">
                <label for="external_id" class="form-label">External ID:</label>
@@ -55,7 +56,7 @@
                <input type="email" name="payer_email" class="form-control" value="<?php echo $t->payer_email ?>" readonly>
             </div>
             <button type="submit" class="btn btn-primary">Test Bayar</button>
-            <?php } ?>
+            <?php } } ?>
          </form>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
