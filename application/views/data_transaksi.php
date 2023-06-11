@@ -59,7 +59,7 @@
                         
                         switch ($status) {
                            case 'pending':
-                              $badgeClass = 'badge bg-danger';
+                              $badgeClass = 'badge bg-warning';
                               break;
                            case 'Sudah Dibayar':
                               $badgeClass = 'badge bg-success';
@@ -77,14 +77,16 @@
                      </span>
                   </td>
                   <td><?php echo $data->amount; ?></td>
-                  <td><?php
-                     if($data->status == 'Sudah Dibayar'){
-                         echo '<span class="badge text-bg-success">Transaksi Selesai</span>';
-                     } else {
-                     ?>
-                     <a class="btn btn-warning btn-sm btn-block" href="<?php echo base_url().'payment/bayar/'.$data->external_id; ?>">
-                     Bayar Transaksi</a><?php } ?>
-                  </td>
+                  <td>
+                     <?php
+                        if ($data->status == 'Sudah Dibayar') {
+                            echo '<span class="badge text-bg-success">Transaksi Selesai</span>';
+                        } elseif ($data->status == 'Expired') {
+                            echo '<span class="badge text-bg-danger">Transaksi Kadaluarsa</span>';
+                        } else {
+                        ?>
+                     <a class="btn btn-warning btn-sm btn-block" href="<?php echo base_url().'payment/bayar/'.$data->external_id; ?>">Bayar Transaksi</a>
+                     <?php } ?>
                   </td>
                </tr>
                <?php endforeach; ?>
