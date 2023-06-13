@@ -102,7 +102,7 @@ class Payment extends CI_Controller {
                     break;
             }
 
-            switch ($payment_channel) {
+            switch ($payment_method) {
                 case 'BANK_TRANSFER':
                     $this->M_Xendit->updatePaymentChannel($external_id, 'TRANSFER BANK');
                     break;
