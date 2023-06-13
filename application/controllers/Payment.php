@@ -85,7 +85,7 @@ class Payment extends CI_Controller {
         if ($callback_token_header == $callback_token) {
             $external_id = $request['external_id'];
             $status = $request['status'];
-            $payment_channel = $request['payment_channel'];
+            $payment_method = $request['payment_method'];
     
             switch ($status) {
                 case 'PAID':
