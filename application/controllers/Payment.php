@@ -34,8 +34,8 @@ class Payment extends CI_Controller {
                 'amount' => $harga,
                 'description' => "Invoice Pembayaran $external_id",
                 'invoice_duration' => 86400, // 1 hari
-                'success_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
-                'failure_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
+                'success_redirect_url' => base_url('Payment/data_transaksi'),
+                'failure_redirect_url' => base_url('Payment/data_transaksi'),
                 'currency' => 'IDR',
                 'locale' => 'id',
                 'items' => [
@@ -149,8 +149,8 @@ class Payment extends CI_Controller {
                 'amount' => $harga,
                 'description' => "Invoice Pembayaran $external_id",
                 'invoice_duration' => 86400, // 1 hari
-                'success_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
-                'failure_redirect_url' => 'https://ilham-wahyu-aji.tech/xendit/payment/data_transaksi',
+                'success_redirect_url' => base_url('Payment/data_transaksi'),
+                'failure_redirect_url' => base_url('Payment/data_transaksi'),
                 'currency' => 'IDR',
                 'locale' => 'id',
                 'items' => [
