@@ -85,9 +85,7 @@ class Payment extends CI_Controller {
         if ($callback_token_header == $callback_token) {
             $external_id = $request['external_id'];
             $status = $request['status'];
-    
-            // Load model M_Xendit
-            $this->load->model('M_Xendit');
+            $payment_channel = $request['payment_channel'];
     
             switch ($status) {
                 case 'PAID':
@@ -101,6 +99,17 @@ class Payment extends CI_Controller {
                 default:
                     // Update status menjadi "Pending" menggunakan model
                     $this->M_Xendit->updateStatus($external_id, 'Pending');
+                    break;
+            }
+
+            switch ($payment_channel) {
+                case 'BANK_TRANSFER':
+                    $this->M_Xendit->updatePaymentChannel($external_id, 'TRANSFER BANK');
+                    break;
+                case 'EWALLET':
+                    $this->M_Xendit->updatePaymentChannel($external_id, 'DOMPET DIGITAL');
+                    break;
+                default:
                     break;
             }
         }
