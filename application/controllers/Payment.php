@@ -86,7 +86,8 @@ class Payment extends CI_Controller {
             $external_id = $request['external_id'];
             $status = $request['status'];
             $payment_method = $request['payment_method'];
-    
+            $payment_channel = $request['payment_channel'];
+
             switch ($status) {
                 case 'PAID':
                     // Update status menjadi "Sudah Dibayar" menggunakan model
@@ -109,9 +110,13 @@ class Payment extends CI_Controller {
                 case 'EWALLET':
                     $this->M_Xendit->updatePaymentChannel($external_id, 'DOMPET DIGITAL');
                     break;
+                case 'RETAIL_OUTLET':
+                    $this->M_Xendit->updatePaymentChannel($external_id, 'MINIMARKET');
+                    break;    
                 default:
                     break;
             }
+            $this->M_Xendit->updatePayment($external_id, $payment_channel);
         }
     }    
     

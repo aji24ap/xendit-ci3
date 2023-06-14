@@ -79,7 +79,7 @@
                      </span>
                   </td>
                   <td><?php echo $data->amount; ?></td>
-                  <td><?php echo $data->pembayaran; ?></td>
+                  <td><?php echo $data->pembayaran; ?> <?php echo $data->menggunakan; ?></td>
                   <td>
                      <?php
                         if ($data->status == 'Sudah Dibayar') {

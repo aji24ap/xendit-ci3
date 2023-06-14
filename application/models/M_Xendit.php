@@ -30,4 +30,9 @@ class M_Xendit extends CI_Model{
        $this->db->where('external_id', $external_id);
        $this->db->update('payments', ['pembayaran' => $payment_method]);
     }
+
+    public function updatePayment($external_id, $payment_channel) {
+        $this->db->where('external_id', $external_id);
+        $this->db->update('payments', ['menggunakan' => $payment_channel]);
+     }
 }    
