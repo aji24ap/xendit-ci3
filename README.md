@@ -21,7 +21,7 @@ Setelah itu, kita bisa melanjutkan dengan mengikuti langkah-langkah berikut:
 1. Gunakan [Git](https://git-scm.com/downloads) untuk clone repository ini:
 
 ```bash
-git clone https://github.com/nama-akunmu/xendit-ci3.git
+git clone https://github.com/aji24ap/xendit-ci3.git
 ```
 
 2. Setelah cloning selesai, kamu bisa menjalankan proyek menggunakan server lokal atau sesuai dengan preferensimu. 💻
